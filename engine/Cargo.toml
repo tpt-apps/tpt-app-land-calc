@@ -1,0 +1,16 @@
+[package]
+name = "tpt-land-engine"
+version = "0.1.0"
+edition = "2021"
+description = "Parcel analysis core of TPT Land Calc: boundary points/GeoJSON/shapefile in, area/perimeter/centroid out — plus (Pro) buffer zones, overlays, and a PDF report writer. Thin, UI-free adapter over the tpt-gis primitives. Pure Rust, no wasm deps."
+publish = false
+
+[features]
+default = []
+# Pro edition capabilities: multi-parcel batch import (shapefile alongside
+# GeoJSON), buffer-zone/overlay analysis, and the PDF report writer.
+# Compiled out of the free WASM build to keep the payload small.
+pro = []
+
+[dependencies]
+tpt-gis = { path = "D:/Programming/1PRODUCTION/Open Source/tpt-gis" }
