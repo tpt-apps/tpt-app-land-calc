@@ -77,4 +77,10 @@
 - [x] WASM size budget: 278,816 bytes raw ≈ 112 KB gzipped (budget ~2 MB)
 - [ ] Verify hub card/detail/sitemap/runner in dev (`npm run dev`), then in
       prod after deploy; flip registry `status` to `'live'` once the
-      Gumroad listing is up (see GUMROAD.md step 8)
+      Gumroad listing is up (see GUMROAD.md step 8). NOTE: on this machine
+      `next dev` (hub repo, Next 16.3/Node 22) hangs before binding its
+      port — banner never prints, listener never opens, even with a cleared
+      `.next/dev` and an idle box. Pre-existing environment issue, not
+      app-specific: the registry entry type-checks (`tsc --noEmit` exit 0)
+      and the bundle mirrors fea-lite's proven glue/runner path exactly.
+      Verify on a machine where the hub dev server starts.
