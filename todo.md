@@ -75,12 +75,16 @@
       '/apps/land-calc/land-calc.js' }`, `coming-soon` until the Gumroad
       listing exists) + `public/apps/land-calc/` populated by `build.ps1`
 - [x] WASM size budget: 278,816 bytes raw ≈ 112 KB gzipped (budget ~2 MB)
-- [ ] Verify hub card/detail/sitemap/runner in dev (`npm run dev`), then in
-      prod after deploy; flip registry `status` to `'live'` once the
-      Gumroad listing is up (see GUMROAD.md step 8). NOTE: on this machine
-      `next dev` (hub repo, Next 16.3/Node 22) hangs before binding its
-      port — banner never prints, listener never opens, even with a cleared
-      `.next/dev` and an idle box. Pre-existing environment issue, not
-      app-specific: the registry entry type-checks (`tsc --noEmit` exit 0)
-      and the bundle mirrors fea-lite's proven glue/runner path exactly.
-      Verify on a machine where the hub dev server starts.
+- [x] Hub verified in dev (localhost:3210, Next 16.3 dev server): detail
+      page `/tools/land-calc` renders and the WasmAppRunner mounts the free
+      app (GPS sample computes 8,968.7 m² in-page); `/tools` card shows with
+      the $129 price; `sitemap.xml` lists `tools/land-calc`. Debugging note
+      for future runs: the first "hang" was a wedged pre-existing dev server
+      (PID holding port 3000 + Next's same-directory single-instance lock),
+      and one restart hit a transient Turbopack panic (PostCSS worker child
+      died with 0xc0000142 under memory pressure) — killing stale node dev
+      instances and restarting clean resolved both. The server is slow on
+      this disk ("Ready in 20–95s", first /tools compile ~2 min): wait for
+      it rather than restarting.
+- [ ] Prod verification after deploy; flip registry `status` to `'live'`
+      once the Gumroad listing is up (see GUMROAD.md step 8)
